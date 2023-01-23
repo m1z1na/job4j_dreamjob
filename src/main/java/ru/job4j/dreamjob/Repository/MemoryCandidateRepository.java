@@ -19,6 +19,8 @@ public class MemoryCandidateRepository  implements CandidateRepository {
     public MemoryCandidateRepository() {
         save(new Candidate(0, "Иванов Иван Петрович","Хороший человек",  LocalDateTime.of(2023,
                 Month.JANUARY, 01, 15, 30, 00)));
+        save(new Candidate(0, "Иванов Иван Петрович2","Хороший человек2",  LocalDateTime.of(2023,
+                Month.JANUARY, 01, 15, 30, 00)));
 
     }
 
