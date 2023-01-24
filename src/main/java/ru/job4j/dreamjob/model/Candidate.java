@@ -8,7 +8,7 @@ public class Candidate {
 
     private String name;
     private String description;
-    private LocalDateTime creationDate;
+    private LocalDateTime creationDate = LocalDateTime.now();
 
     public Candidate(int id, String name, String description, LocalDateTime creationDate) {
         this.id = id;
@@ -16,7 +16,9 @@ public class Candidate {
         this.description = description;
         this.creationDate = creationDate;
     }
+    public Candidate( ) {
 
+    }
 
     @Override
     public boolean equals(Object o) {
