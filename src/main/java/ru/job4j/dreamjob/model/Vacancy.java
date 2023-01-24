@@ -1,16 +1,20 @@
 package ru.job4j.dreamjob.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Vacancy {
 
     private int id;
-
     private String title;
+    private String description;
+    private LocalDateTime creationDate;
 
-    public Vacancy(int id, String title) {
+    public Vacancy(int id, String title , String description, LocalDateTime creationDate) {
         this.id = id;
         this.title = title;
+        this.description = description;
+        this.creationDate = creationDate;
     }
 
     public int getId() {
@@ -46,4 +50,19 @@ public class Vacancy {
         return Objects.hash(id);
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
 }
