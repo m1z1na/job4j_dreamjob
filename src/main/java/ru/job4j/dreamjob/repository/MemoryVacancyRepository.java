@@ -33,9 +33,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
                 Month.JANUARY, 01, 15, 30, 00)));
     }
 
-//    public static MemoryVacancyRepository getInstance() {
-//        return INSTANCE;
-//    }
+
 
     @Override
     public Vacancy save(Vacancy vacancy) {
