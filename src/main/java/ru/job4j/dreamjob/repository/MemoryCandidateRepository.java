@@ -35,5 +35,4 @@ public class MemoryCandidateRepository  implements CandidateRepository {
         return null;
     }
 
-
 }
