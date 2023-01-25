@@ -8,18 +8,25 @@ public class Vacancy {
     private int id;
     private String title;
     private String description;
-
+    private boolean visible;
     private LocalDateTime creationDate = LocalDateTime.now();
 
     public Vacancy() {
     }
-    public Vacancy(int id, String title , String description, LocalDateTime creationDate) {
+    public Vacancy(int id, String title , String description, LocalDateTime creationDate, boolean visible) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
+        this.visible = visible;
+    }
+    public boolean getVisible() {
+        return visible;
     }
 
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
     public int getId() {
         return id;
     }

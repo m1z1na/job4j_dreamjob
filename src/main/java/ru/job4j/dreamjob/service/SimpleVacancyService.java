@@ -8,6 +8,7 @@ import ru.job4j.dreamjob.repository.VacancyRepository;
 
 import java.util.Collection;
 import java.util.Optional;
+
 @Service
 public class SimpleVacancyService implements VacancyService {
 
