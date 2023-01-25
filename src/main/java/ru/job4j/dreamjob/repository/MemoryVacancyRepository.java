@@ -20,17 +20,17 @@ public class MemoryVacancyRepository implements VacancyRepository {
 
     public MemoryVacancyRepository() {
         save(new Vacancy(0, "Intern Java Developer", "Intern Java Developer", LocalDateTime.of(2023,
-                Month.JANUARY, 01, 15, 30, 00), true));
+                Month.JANUARY, 01, 15, 30, 00), true, 1));
         save(new Vacancy(0, "Junior Java Developer", "Junior Java Developer", LocalDateTime.of(2023,
-                Month.JANUARY, 01, 15, 30, 00), true));
+                Month.JANUARY, 01, 15, 30, 00), true, 1));
         save(new Vacancy(0, "Junior+ Java Developer", "Junior+ Java Developer", LocalDateTime.of(2023,
-                Month.JANUARY, 01, 15, 30, 00), true));
+                Month.JANUARY, 01, 15, 30, 00), true, 1));
         save(new Vacancy(0, "Middle Java Developer", "Middle Java Developer", LocalDateTime.of(2023,
-                Month.JANUARY, 01, 15, 30, 00), true));
+                Month.JANUARY, 01, 15, 30, 00), true, 1));
         save(new Vacancy(0, "Middle+ Java Developer", "Middle+ Java Developer", LocalDateTime.of(2023,
-                Month.JANUARY, 01, 15, 30, 00), true));
+                Month.JANUARY, 01, 15, 30, 00), true, 1));
         save(new Vacancy(0, "Senior Java Developer", "Senior Java Developer", LocalDateTime.of(2023,
-                Month.JANUARY, 01, 15, 30, 00), true));
+                Month.JANUARY, 01, 15, 30, 00), true, 1));
     }
 
 
@@ -49,7 +49,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
 
     @Override
     public boolean update(Vacancy vacancy) {
-        return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) -> new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate(), vacancy.getVisible())) != null;
+        return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) -> new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate(), vacancy.getVisible(), vacancy.getCityId())) != null;
     }
 
     @Override
