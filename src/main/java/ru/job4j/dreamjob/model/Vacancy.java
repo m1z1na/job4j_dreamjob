@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 @Getter
 @Setter
+@AllArgsConstructor
 public class Vacancy {
 
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
