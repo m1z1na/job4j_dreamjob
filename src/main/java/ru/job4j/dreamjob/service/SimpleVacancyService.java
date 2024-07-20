@@ -7,8 +7,9 @@ import ru.job4j.dreamjob.repository.VacancyRepository;
 
 import java.util.Collection;
 import java.util.Optional;
-
+import net.jcip.annotations.ThreadSafe;
 @Service
+@ThreadSafe
 public class SimpleVacancyService implements VacancyService {
 
     private final VacancyRepository vacancyRepository;
