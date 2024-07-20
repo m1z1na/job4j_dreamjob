@@ -1,6 +1,7 @@
 package ru.job4j.dreamjob.model;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 @Getter
 @Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 public class Vacancy {
 
@@ -45,6 +47,19 @@ public class Vacancy {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    @Override
+    public String toString() {
+        return "Vacancy{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", creationDate=" + creationDate +
+                ", visible=" + visible +
+                ", cityId=" + cityId +
+                ", fileId=" + fileId +
+                '}';
     }
 }
 /*

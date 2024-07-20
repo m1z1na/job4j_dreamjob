@@ -25,7 +25,7 @@ public class Sql2oVacancyRepositoryTest {
     private static Sql2oFileRepository sql2oFileRepository;
 
     private static File file;
-/*
+
     @BeforeAll
     public static void initRepositories() throws Exception {
         var properties = new Properties();
@@ -43,7 +43,7 @@ public class Sql2oVacancyRepositoryTest {
         sql2oVacancyRepository = new Sql2oVacancyRepository(sql2o);
         sql2oFileRepository = new Sql2oFileRepository(sql2o);
 
-        нужно сохранить хотя бы один файл, т.к. Vacancy от него зависит
+       /* нужно сохранить хотя бы один файл, т.к. Vacancy от него зависит*/
         file = new File("test", "test");
         sql2oFileRepository.save(file);
     }
@@ -120,5 +120,5 @@ public class Sql2oVacancyRepositoryTest {
         var vacancy = new Vacancy(0, "title", "description", creationDate, true, 1, file.getId());
         var isUpdated = sql2oVacancyRepository.update(vacancy);
         assertThat(isUpdated).isFalse();
-    }*/
+    }
 }
