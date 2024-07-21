@@ -19,7 +19,7 @@ import static java.util.Optional.empty;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Sql2oVacancyRepositoryTest {
- /*
+
     private static Sql2oVacancyRepository sql2oVacancyRepository;
 
     private static Sql2oFileRepository sql2oFileRepository;
@@ -121,5 +121,5 @@ public class Sql2oVacancyRepositoryTest {
         var isUpdated = sql2oVacancyRepository.update(vacancy);
         assertThat(isUpdated).isFalse();
     }
-  */
+
 }

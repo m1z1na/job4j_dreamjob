@@ -1,11 +1,9 @@
 package ru.job4j.dreamjob.service;
 
-import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
+import ru.job4j.dreamjob.dto.FileDto;
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.repository.CityRepository;
-import ru.job4j.dreamjob.repository.MemoryCandidateRepository;
 import ru.job4j.dreamjob.repository.CandidateRepository;
 
 import java.util.Collection;
@@ -15,14 +13,20 @@ import java.util.Optional;
 public class SimpleCandidateService implements CandidateService {
 
     private final CandidateRepository candidateRepository;
+    private final FileService fileService;
 
-    public SimpleCandidateService(CandidateRepository sql2oCandidateRepository) {
+    public SimpleCandidateService(CandidateRepository sql2oCandidateRepository, FileService fileService) {
         this.candidateRepository = sql2oCandidateRepository;
+        this.fileService = fileService;
     }
-
+    private void saveNewFile(Candidate candidate, FileDto image) {
+        var file = fileService.save(image);
+        candidate.setFileId(file.getId());
+    }
     @Override
-    public Candidate save(Candidate vacancy) {
-        return candidateRepository.save(vacancy);
+    public Candidate save(Candidate candidate, FileDto image) {
+        saveNewFile(candidate, image);
+        return candidateRepository.save(candidate);
     }
 
     @Override
@@ -31,8 +35,8 @@ public class SimpleCandidateService implements CandidateService {
     }
 
     @Override
-    public boolean update(Candidate vacancy) {
-        return candidateRepository.update(vacancy);
+    public boolean update(Candidate candidate) {
+        return candidateRepository.update(candidate);
     }
 
     @Override

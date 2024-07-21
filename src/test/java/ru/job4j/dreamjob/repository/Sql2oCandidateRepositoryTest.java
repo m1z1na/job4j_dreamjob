@@ -1,10 +1,13 @@
 package ru.job4j.dreamjob.repository;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.job4j.dreamjob.configuration.DatasourceConfiguration;
 import ru.job4j.dreamjob.model.Candidate;
+import ru.job4j.dreamjob.model.File;
+
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Properties;
@@ -14,13 +17,15 @@ import static java.util.Optional.empty;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Sql2oCandidateRepositoryTest {
-/*
+
     private static Sql2oCandidateRepository sql2oCandidateRepository;
+    private static Sql2oFileRepository sql2oFileRepository;
+    private static File file;
 
     @BeforeAll
     public static void initRepositories() throws Exception {
         var properties = new Properties();
-        try (var inputStream = Sql2oCandidateRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
+        try (var inputStream = Sql2oCandidateRepository.class.getClassLoader().getResourceAsStream("connection.properties")) {
             properties.load(inputStream);
         }
         var url = properties.getProperty("datasource.url");
@@ -32,7 +37,16 @@ public class Sql2oCandidateRepositoryTest {
         var sql2o = configuration.databaseClient(datasource);
 
         sql2oCandidateRepository = new Sql2oCandidateRepository(sql2o);
+        sql2oFileRepository = new Sql2oFileRepository(sql2o);
 
+        /* нужно сохранить хотя бы один файл, т.к. candidate от него зависит */
+        file = new File("test4", "test4");
+        sql2oFileRepository.save(file);
+    }
+
+    @AfterAll
+    public static void deleteFile() {
+        sql2oFileRepository.deleteById(file.getId());
     }
 
     @AfterEach
@@ -46,7 +60,7 @@ public class Sql2oCandidateRepositoryTest {
     @Test
     public void whenSaveThenGetSame() {
         var creationDate = now().truncatedTo(ChronoUnit.MINUTES);
-        var candidate = sql2oCandidateRepository.save(new Candidate(0, "title", "description", creationDate));
+        var candidate = sql2oCandidateRepository.save(new Candidate(0, "title", "description", true, 1, file.getId(), creationDate));
         var savedCandidate = sql2oCandidateRepository.findById(candidate.getId()).get();
         assertThat(savedCandidate).usingRecursiveComparison().isEqualTo(candidate);
     }
@@ -54,9 +68,9 @@ public class Sql2oCandidateRepositoryTest {
     @Test
     public void whenSaveSeveralThenGetAll() {
         var creationDate = now().truncatedTo(ChronoUnit.MINUTES);
-        var candidate1 = sql2oCandidateRepository.save(new Candidate(0, "title1", "description1", creationDate));
-        var candidate2 = sql2oCandidateRepository.save(new Candidate(0, "title2", "description2", creationDate));
-        var candidate3 = sql2oCandidateRepository.save(new Candidate(0, "title3", "description3", creationDate));
+        var candidate1 = sql2oCandidateRepository.save(new Candidate(0, "title1", "description1", true, 1, file.getId(), creationDate));
+        var candidate2 = sql2oCandidateRepository.save(new Candidate(0, "title2", "description2", true, 1, file.getId(), creationDate));
+        var candidate3 = sql2oCandidateRepository.save(new Candidate(0, "title3", "description3", true, 1, file.getId(), creationDate));
         var result = sql2oCandidateRepository.findAll();
         assertThat(result).isEqualTo(List.of(candidate1, candidate2, candidate3));
     }
@@ -70,7 +84,7 @@ public class Sql2oCandidateRepositoryTest {
     @Test
     public void whenDeleteThenGetEmptyOptional() {
         var creationDate = now().truncatedTo(ChronoUnit.MINUTES);
-        var candidate = sql2oCandidateRepository.save(new Candidate(0, "title", "description", creationDate));
+        var candidate = sql2oCandidateRepository.save(new Candidate(0, "title", "description", true, 1, file.getId(), creationDate));
         var isDeleted = sql2oCandidateRepository.deleteById(candidate.getId());
         var savedCandidate = sql2oCandidateRepository.findById(candidate.getId());
         assertThat(isDeleted).isTrue();
@@ -85,9 +99,9 @@ public class Sql2oCandidateRepositoryTest {
     @Test
     public void whenUpdateThenGetUpdated() {
         var creationDate = now().truncatedTo(ChronoUnit.MINUTES);
-        var candidate = sql2oCandidateRepository.save(new Candidate(0, "title", "description", creationDate));
+        var candidate = sql2oCandidateRepository.save(new Candidate(0, "title", "description", true, 1, file.getId(), creationDate));
         var updatedCandidate = new Candidate(
-                candidate.getId(), "new title", "new description", creationDate.plusDays(1));
+                candidate.getId(), "new title", "new description", true, 1, file.getId(), creationDate.plusDays(1));
         var isUpdated = sql2oCandidateRepository.update(updatedCandidate);
         var savedCandidate = sql2oCandidateRepository.findById(updatedCandidate.getId()).get();
         assertThat(isUpdated).isTrue();
@@ -97,8 +111,9 @@ public class Sql2oCandidateRepositoryTest {
     @Test
     public void whenUpdateUnExistingCandidateThenGetFalse() {
         var creationDate = now().truncatedTo(ChronoUnit.MINUTES);
-        var candidate = new Candidate(0, "title", "description", creationDate);
+        var candidate = new Candidate(0, "name", "description", true, 1, file.getId(), creationDate);
         var isUpdated = sql2oCandidateRepository.update(candidate);
         assertThat(isUpdated).isFalse();
-    }*/
+    }
+
 }

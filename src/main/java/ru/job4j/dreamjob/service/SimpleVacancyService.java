@@ -16,10 +16,6 @@ public class SimpleVacancyService implements VacancyService {
 
     private final FileService fileService;
 
-    /*public SimpleVacancyService(VacancyRepository sql2oVacancyRepository, FileService fileService) {
-        this.vacancyRepository = sql2oVacancyRepository;
-        this.fileService = fileService;
-    }*/
     public SimpleVacancyService(VacancyRepository sql2oVacancyRepository, FileService fileService) {
         this.vacancyRepository = sql2oVacancyRepository;
         this.fileService = fileService;
@@ -28,6 +24,7 @@ public class SimpleVacancyService implements VacancyService {
     @Override
     public Vacancy save(Vacancy vacancy, FileDto image) {
         saveNewFile(vacancy, image);
+        System.out.println("test");
         return vacancyRepository.save(vacancy);
     }
 
