@@ -19,8 +19,9 @@ public class Sql2oUserRepository implements UserRepository {
     @Override
     public Optional<User> save(User user) {
         try (var connection = sql2o.open()) {
-            var query = connection.createQuery("INSERT INTO files (email, password) VALUES (:email, :password)", true)
+            var query = connection.createQuery("INSERT INTO users (email, password, name) VALUES (:email, :password, :name)", true)
                     .addParameter("email", user.getEmail())
+                    .addParameter("name", user.getName())
                     .addParameter("password", user.getPassword());
             int generatedId = query.executeUpdate().getKey(Integer.class);
             user.setId(generatedId);
@@ -31,11 +32,18 @@ public class Sql2oUserRepository implements UserRepository {
     @Override
     public Optional<User> findByEmailAndPassword(String email, String password) {
         try (var connection = sql2o.open()) {
-            var query = connection.createQuery("SELECT * FROM users WHERE password = :password");
+            var query = connection.createQuery("SELECT * FROM users WHERE email = :email AND password = :password");
             var user = query.addParameter("email", email).addParameter("password", password).executeAndFetchFirst(User.class);
             return Optional.ofNullable(user);
 
         }
     }
 
+    @Override
+    public void deleteAll() {
+        try (var connection = sql2o.open()) {
+            var query = connection.createQuery("DELETE FROM users");
+            query.executeUpdate().getResult();
+        }
+    }
 }
