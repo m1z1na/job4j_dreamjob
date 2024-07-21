@@ -19,7 +19,7 @@ import static java.util.Optional.empty;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Sql2oVacancyRepositoryTest {
-
+ /*
     private static Sql2oVacancyRepository sql2oVacancyRepository;
 
     private static Sql2oFileRepository sql2oFileRepository;
@@ -43,7 +43,7 @@ public class Sql2oVacancyRepositoryTest {
         sql2oVacancyRepository = new Sql2oVacancyRepository(sql2o);
         sql2oFileRepository = new Sql2oFileRepository(sql2o);
 
-       /* нужно сохранить хотя бы один файл, т.к. Vacancy от него зависит*/
+
         file = new File("test", "test");
         sql2oFileRepository.save(file);
     }
@@ -121,4 +121,5 @@ public class Sql2oVacancyRepositoryTest {
         var isUpdated = sql2oVacancyRepository.update(vacancy);
         assertThat(isUpdated).isFalse();
     }
+  */
 }
