@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Sql2oUserRepositoryTest {
-/*
+
     private static Sql2oUserRepository sql2oUserRepository;
 
     @BeforeAll
@@ -23,7 +23,6 @@ public class Sql2oUserRepositoryTest {
         var url = properties.getProperty("datasource.url");
         var username = properties.getProperty("datasource.username");
         var password = properties.getProperty("datasource.password");
-
         var configuration = new DatasourceConfiguration();
         var datasource = configuration.connectionPool(url, username, password);
         var sql2o = configuration.databaseClient(datasource);
@@ -47,6 +46,7 @@ public class Sql2oUserRepositoryTest {
         });
         assertThat(exception.getMessage()).containsIgnoringCase("Unique index or primary key violation");
     }
+
     @Test
     public void whenSaveThenGetSame() {
         var user = sql2oUserRepository.save(new User(0, "email1", "name1", "password"));
@@ -59,5 +59,5 @@ public class Sql2oUserRepositoryTest {
     public void whenDontSaveThenNothingFound() {
         assertThat(sql2oUserRepository.findByEmailAndPassword("email2", "password")).isEmpty();
     }
-*/
+
 }
