@@ -51,6 +51,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -67,7 +69,6 @@
             <version>2.1.214</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
     <build>
         <plugins>
