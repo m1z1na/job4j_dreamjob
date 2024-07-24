@@ -1,12 +1,13 @@
 package ru.job4j.dreamjob.repository;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
 import ru.job4j.dreamjob.model.File;
 import ru.job4j.dreamjob.model.User;
 
 import java.util.Optional;
-
+@Slf4j
 @Repository
 public class Sql2oUserRepository implements UserRepository {
 
@@ -26,7 +27,10 @@ public class Sql2oUserRepository implements UserRepository {
             int generatedId = query.executeUpdate().getKey(Integer.class);
             user.setId(generatedId);
             return Optional.of(user);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
+        return Optional.empty();
     }
 
     @Override
