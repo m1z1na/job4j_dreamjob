@@ -29,7 +29,6 @@ public class Sql2oUserRepositoryTest {
         var configuration = new DatasourceConfiguration();
         var datasource = configuration.connectionPool(url, username, password);
         var sql2o = configuration.databaseClient(datasource);
-
         sql2oUserRepository = new Sql2oUserRepository(sql2o);
 
     }
