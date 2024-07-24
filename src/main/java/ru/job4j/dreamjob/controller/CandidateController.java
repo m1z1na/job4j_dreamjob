@@ -52,12 +52,12 @@ public class CandidateController {
 
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {
-        var vacancyOptional = candidateService.findById(id);
-        if (vacancyOptional.isEmpty()) {
+        var candidateOptional = candidateService.findById(id);
+        if (candidateOptional.isEmpty()) {
             model.addAttribute("message", "Кандидат с указанным идентификатором не найден");
             return "errors/404";
         }
-        model.addAttribute("candidate", vacancyOptional.get());
+        model.addAttribute("candidate",candidateOptional.get());
         return "candidates/one";
     }
 
