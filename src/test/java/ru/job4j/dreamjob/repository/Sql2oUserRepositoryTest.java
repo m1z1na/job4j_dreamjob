@@ -6,7 +6,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.job4j.dreamjob.configuration.DatasourceConfiguration;
 import ru.job4j.dreamjob.model.User;
+
+import java.util.Optional;
 import java.util.Properties;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -39,12 +42,11 @@ public class Sql2oUserRepositoryTest {
     @Test
     public void whenSaveWithSameEmail() {
 
-        var user1 = sql2oUserRepository.save(new User(0, "email3", "name3", "password"));
+        var user1 = sql2oUserRepository.save(new User(1, "name", "name1", "password"));
         assertThat(user1).isNotEmpty();
-        Throwable exception = assertThrows(Exception.class, () -> {
-            sql2oUserRepository.save(user1.get());
-        });
-        assertThat(exception.getMessage()).containsIgnoringCase("Unique index or primary key violation");
+        var user2 = sql2oUserRepository.save(new User(2, "name", "name1", "password"));
+        assertThat(user2).isEmpty();
+
     }
 
     @Test
